@@ -60,7 +60,7 @@ class ContentsController < ApplicationController
   def destroy
     @content.destroy
     respond_to do |format|
-      format.html { redirect_to contents_url, notice: 'ファイルを削除しましｔあ' }
+      format.html { redirect_to contents_url, notice: 'ファイルを削除しました' }
       format.json { head :no_content }
     end
   end
