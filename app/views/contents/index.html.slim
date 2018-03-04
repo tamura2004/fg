@@ -1,0 +1,24 @@
+- model_class = Content
+.page-header
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table.table.table-striped
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:name)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @contents.each do |content|
+      tr
+        td= link_to content.id, content_path(content)
+        td= content.name
+        td=l content.created_at
+        td
+          = link_to t('.show', :default => t("helpers.links.show")), content_path(content),  :class => 'btn btn-default btn-xs'
+          '
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_content_path(content), :class => 'btn btn-default btn-xs'
+          '
+          = link_to "削除", content_path(content), method: :delete, data: { confirm: "本当に削除しますか？" }, :class => 'btn btn-xs btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_content_path, :class => 'btn btn-primary'
