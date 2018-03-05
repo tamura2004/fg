@@ -5,7 +5,7 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
-    @contents = Content.all
+    @contents = current_user.contents
   end
 
   # GET /contents/1
@@ -26,9 +26,12 @@ class ContentsController < ApplicationController
   # POST /contents
   # POST /contents.json
   def create
-    @content = Content.new
-    @content.name = content_params[:file].original_filename
-    @content.file = content_params[:file].read
+    file = content_params[:file]
+    @content = Content.new(
+      name: file.original_filename,
+      file: file.read,
+      user_id: current_user.id      
+    )
 
     respond_to do |format|
       if @content.save
