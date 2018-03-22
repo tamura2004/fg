@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304093615) do
+ActiveRecord::Schema.define(version: 20180320132219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,12 @@ ActiveRecord::Schema.define(version: 20180304093615) do
   create_table "contents", force: :cascade do |t|
     t.string "name", null: false
     t.binary "file"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
+    t.bigint "zone_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_contents_on_user_id"
+    t.index ["zone_id"], name: "index_contents_on_zone_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,6 +36,12 @@ ActiveRecord::Schema.define(version: 20180304093615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_users_on_uid", unique: true
+  end
+
+  create_table "zones", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

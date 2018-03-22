@@ -18,9 +18,10 @@ html lang="en"
             span.icon-bar
           a.navbar-brand href="#"FileGuard
           .navbar-collapse.collapse.navbar-responsive-collapse
-            ul.nav.navbar-nav
+            ul.nav.navbar-nav.pull-right
               - if current_user
-                li= link_to "logout", :session, method: :delete
+                = drop_down current_user.name
+                  li= link_to "logout", :session, method: :delete
               - else
                 li= link_to "login", :login
 

@@ -5,7 +5,7 @@ class Authenticator
 
   def authenticate(raw_password)
     @user &&
-      !@user.suspended?
+      !@user.suspended? &&
       @user.hashed_password &&
       @user.start_date <= Date.today &&
       (@user.end_date.nil? || @user.end_date > Date.today) &&

@@ -1,24 +1,26 @@
 - model_class = Content
 .page-header
-  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  h1 登録ファイル一覧
 table.table.table-striped
   thead
     tr
-      th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:created_at)
-      th=t '.actions', :default => t("helpers.actions")
+      th.col-xs-1 No
+      th.col-xs-5 ファイル名
+      th.col-xs-2 参照許可
+      th.col-xs-2 登録ユーザー
+      th.col-xs-2 =t '.actions', :default => t("helpers.actions")
   tbody
     - @contents.each do |content|
       tr
-        td= link_to content.id, content_path(content)
+        td= link_to content.id, zone_content_path(@zone,content)
         td= content.name
-        td=l content.created_at
+        td= content.zone&.name
+        td= content.user&.name
         td
-          = link_to t('.show', :default => t("helpers.links.show")), content_path(content),  :class => 'btn btn-default btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), zone_content_path(@zone,content),  :class => 'btn btn-default btn-xs'
           '
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_content_path(content), :class => 'btn btn-default btn-xs'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_zone_content_path(@zone,content), :class => 'btn btn-default btn-xs'
           '
-          = link_to "削除", content_path(content), method: :delete, data: { confirm: "本当に削除しますか？" }, :class => 'btn btn-xs btn-danger'
+          = link_to "削除", zone_content_path(@zone,content), method: :delete, data: { confirm: "本当に削除しますか？" }, :class => 'btn btn-xs btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_content_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_zone_content_path(@zone), :class => 'btn btn-primary'
