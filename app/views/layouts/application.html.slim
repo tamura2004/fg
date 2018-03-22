@@ -18,12 +18,15 @@ html lang="en"
             span.icon-bar
           a.navbar-brand href="#"FileGuard
           .navbar-collapse.collapse.navbar-responsive-collapse
+            - if @zone
+              ul.nav.navbar-nav
+                = menu_item @zone.name
             ul.nav.navbar-nav.pull-right
               - if current_user
                 = drop_down current_user.name
-                  li= link_to "logout", :session, method: :delete
+                  li= link_to "logout", :zone_session, method: :delete
               - else
-                li= link_to "login", :login
+                li= link_to "login", :zone_login
 
     .container
       .row

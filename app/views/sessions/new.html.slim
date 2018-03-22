@@ -1,5 +1,5 @@
 .col-lg-4
-	= simple_form_for [@zone, @form], url: :session do |f|
+	= simple_form_for @form, url: zone_session_path do |f|
 		= f.input :uid, label: "ユーザー名"
 		= f.input :password, label: "パスワード"
 		= f.submit "ログイン", class: "btn btn-primary"
