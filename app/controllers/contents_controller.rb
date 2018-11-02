@@ -87,7 +87,7 @@ class ContentsController < ApplicationController
 
     def authorize
       unless current_user
-        redirect_to :login
+        redirect_to :zone_login
       end
     end
 end
